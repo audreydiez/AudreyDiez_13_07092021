@@ -2,7 +2,6 @@ import './SignIn.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
-import Logo from '../../assets/img/argentBankLogo.png'
 import { Link } from 'react-router-dom'
 
 function SignIn() {
@@ -24,12 +23,10 @@ function SignIn() {
                         <input type="checkbox" id="remember-me" />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
-                    // PLACEHOLDER DUE TO STATIC SITE
+
                     <Link className="sign-in-button" to={'/user'}>
                         Sign In
                     </Link>
-                    {/* SHOULD BE THE BUTTON BELOW*/}
-                    {/*<button class="sign-in-button">Sign In</button> */}
                 </form>
             </section>
         </main>

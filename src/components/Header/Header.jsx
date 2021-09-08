@@ -14,7 +14,7 @@ function Header() {
             </Link>
             <div>
                 <Link className="main-nav-item" to={'/sign-in'}>
-                    <FontAwesomeIcon icon={faUserCircle} />
+                    <FontAwesomeIcon icon={faUserCircle} className="main-nav-item__icon" />
                     Sign In
                 </Link>
             </div>

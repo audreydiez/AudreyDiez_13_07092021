@@ -3,16 +3,29 @@ import React from 'react'
 import Account from 'components/Account/Account'
 
 function User() {
-    const [editModal, setEditName] = React.useState(false)
+    const [editName, setEditName] = React.useState(false)
+    const [firstName, setFirstName] = React.useState('Tony')
+    const [lastName, setLastName] = React.useState('Stark')
 
     return (
         <main className="main bg-dark">
             <div className="header">
-                {editModal ? (
+                {editName ? (
                     <h1>
                         Welcome back
                         <br />
-                        Edit Name Input
+                        <input
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            type="text"
+                            className="input-text"
+                        />
+                        <input
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            type="text"
+                            className="input-text"
+                        />
                         <br />
                         <button
                             className="edit-button"
@@ -20,6 +33,13 @@ function User() {
                                 setEditName(false)
                             }}>
                             Confirm
+                        </button>
+                        <button
+                            className="edit-button"
+                            onClick={() => {
+                                setEditName(false)
+                            }}>
+                            Cancel
                         </button>
                     </h1>
                 ) : (
