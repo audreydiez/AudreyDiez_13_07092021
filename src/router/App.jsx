@@ -1,34 +1,33 @@
-import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom'
-
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import './App.scss'
-import Home from 'components/Home/Home'
-import SignIn from 'components/SignIn/SignIn'
-import User from 'components/User/User'
-import EditName from 'components/EditName/EditName'
-import Transactions from 'components/Transactions/Transactions'
-import { SubRoutes } from 'utils/Utils'
+import Home from 'containers/Home/Home'
+import SignIn from 'containers/SignIn/SignIn'
+import User from 'containers/User/User'
+import { SubRoutes } from 'router/SubRoutes/SubRoutes'
 import Header from 'components/Header/Header'
 import ErrorPage from 'components/ErrorPage/ErrorPage'
 import Footer from 'components/Footer/Footer'
 
 const routes = [
     {
-        path: '/home',
+        path: '/',
+        exact: true,
         component: Home
     },
     {
         path: '/sign-in',
+        exact: true,
         component: SignIn
     },
     {
         path: '/user',
-        component: User,
-        routes: [
-            {
-                path: '/user/edit-name',
-                component: EditName
-            }
-        ]
+        exact: true,
+        component: User
+    },
+    {
+        path: '*',
+        exact: false,
+        component: ErrorPage
     }
 ]
 
