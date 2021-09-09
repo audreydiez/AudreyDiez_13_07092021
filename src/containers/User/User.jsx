@@ -47,7 +47,7 @@ function User() {
                         <h1>
                             Welcome back
                             <br />
-                            Tony stark
+                            {firstName} {lastName}
                         </h1>
                         <button
                             className="edit-button"

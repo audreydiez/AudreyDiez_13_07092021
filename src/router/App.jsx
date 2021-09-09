@@ -4,9 +4,9 @@ import Home from 'containers/Home/Home'
 import SignIn from 'containers/SignIn/SignIn'
 import User from 'containers/User/User'
 import { SubRoutes } from 'router/SubRoutes/SubRoutes'
-import Header from 'components/Header/Header'
+import Header from 'components/layout/Header/Header'
 import ErrorPage from 'components/ErrorPage/ErrorPage'
-import Footer from 'components/Footer/Footer'
+import Footer from 'components/layout/Footer/Footer'
 
 const routes = [
     {
