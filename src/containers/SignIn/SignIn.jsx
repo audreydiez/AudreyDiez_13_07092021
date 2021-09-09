@@ -4,11 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { UserLogin } from 'utils/AxiosApiProvider'
 import React from 'react'
+import { useHistory } from 'react-router'
 
 function SignIn() {
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [errorMsg, setErrorMsg] = React.useState(' ')
+
+    let history = useHistory()
 
     const logIn = async (e) => {
         e.preventDefault()
@@ -20,7 +23,7 @@ function SignIn() {
         if (response.status !== 200) {
             return setErrorMsg(response.message)
         }
-        setErrorMsg(response.data.message)
+        history.push('/user')
     }
 
     return (
