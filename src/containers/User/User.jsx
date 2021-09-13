@@ -1,11 +1,19 @@
 import './User.scss'
 import React from 'react'
 import Account from 'components/Account/Account'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
 
 function User() {
     const [editName, setEditName] = React.useState(false)
     const [firstName, setFirstName] = React.useState('Tony')
     const [lastName, setLastName] = React.useState('Stark')
+
+    let history = useHistory()
+
+    const isConnected = useSelector((state) => state.counter.connected)
+
+    if (!isConnected) history.push('/sign-in')
 
     return (
         <main className="main bg-dark">

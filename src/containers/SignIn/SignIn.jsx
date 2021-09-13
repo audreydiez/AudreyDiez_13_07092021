@@ -2,9 +2,11 @@ import './SignIn.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
-import { UserLogin } from 'utils/AxiosApiProvider'
+import { UserLogin } from 'utils/api/AxiosApiProvider'
 import React from 'react'
 import { useHistory } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { logIn } from 'utils/reducer/reducer'
 
 function SignIn() {
     const [username, setUsername] = React.useState('')
@@ -13,8 +15,14 @@ function SignIn() {
 
     let history = useHistory()
 
-    const logIn = async (e) => {
+    //reducer
+    const isConnected = useSelector((state) => state.counter.connected)
+    const dispatch = useDispatch()
+
+    // Log-in
+    const logUser = async (e) => {
         e.preventDefault()
+        setErrorMsg('')
 
         if (username.length === 0 || password.length === 0)
             return setErrorMsg('All fields are required')
@@ -23,6 +31,8 @@ function SignIn() {
         if (response.status !== 200) {
             return setErrorMsg(response.message)
         }
+
+        dispatch(logIn(response.data.body.token))
         history.push('/user')
     }
 
@@ -30,8 +40,8 @@ function SignIn() {
         <main className="main bg-dark">
             <section className="sign-in-content">
                 <FontAwesomeIcon icon={faUserCircle} />
-                <h1>Sign In</h1>
-                <form onSubmit={logIn}>
+                <h1>Sign In - {isConnected}</h1>
+                <form onSubmit={logUser}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
                         <input
