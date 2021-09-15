@@ -1,8 +1,10 @@
 import './User.scss'
 import React from 'react'
 import Account from 'components/Account/Account'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
+import { setUser } from '../../utils/reducer/reducer'
+import { getUserProfile, UserLogin } from '../../utils/api/AxiosApiProvider'
 
 function User() {
     const [editName, setEditName] = React.useState(false)
@@ -10,10 +12,27 @@ function User() {
     const [lastName, setLastName] = React.useState('Stark')
 
     let history = useHistory()
+    const dispatch = useDispatch()
 
-    const isConnected = useSelector((state) => state.counter.connected)
+    const isConnected = useSelector((state) => state.userAuth.connected)
+    const userToken = useSelector((state) => state.userAuth.token)
 
     if (!isConnected) history.push('/sign-in')
+
+    React.useEffect(() => {
+        const getProfile = async (e) => {
+            const response = await getUserProfile()
+
+            if (response.status === 200) {
+                dispatch(setUser(response.data.body))
+            }
+        }
+
+        getProfile().then((r) => {
+            // set state ?
+            console.log()
+        })
+    }, [userToken])
 
     return (
         <main className="main bg-dark">
@@ -55,7 +74,6 @@ function User() {
                         <h1>
                             Welcome back
                             <br />
-                            {firstName} {lastName}
                         </h1>
                         <button
                             className="edit-button"

@@ -16,7 +16,7 @@ function SignIn() {
     let history = useHistory()
 
     //reducer
-    const isConnected = useSelector((state) => state.counter.connected)
+
     const dispatch = useDispatch()
 
     // Log-in
@@ -40,7 +40,7 @@ function SignIn() {
         <main className="main bg-dark">
             <section className="sign-in-content">
                 <FontAwesomeIcon icon={faUserCircle} />
-                <h1>Sign In - {isConnected}</h1>
+                <h1>Sign In</h1>
                 <form onSubmit={logUser}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>

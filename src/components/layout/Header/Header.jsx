@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { logOut } from 'utils/reducer/reducer'
+import userAuthReducer, { logOut } from 'utils/reducer/reducer'
 
 function Header() {
-    const isConnected = useSelector((state) => state.counter.connected)
+    const isConnected = useSelector((state) => state.userAuth.connected)
 
     const dispatch = useDispatch()
 
@@ -22,10 +22,13 @@ function Header() {
 
             <div>
                 {isConnected ? (
-                    <div className="main-nav-item" onClick={() => dispatch(logOut())}>
-                        <FontAwesomeIcon icon={faUserCircle} className="main-nav-item__icon" />
-                        Log Out
-                    </div>
+                    <>
+                        <Link to={'/user'}>Welcome user</Link>
+                        <div className="main-nav-item" onClick={() => dispatch(logOut())}>
+                            <FontAwesomeIcon icon={faUserCircle} className="main-nav-item__icon" />
+                            Log Out
+                        </div>
+                    </>
                 ) : (
                     <Link className="main-nav-item" to={'/sign-in'}>
                         <FontAwesomeIcon icon={faUserCircle} className="main-nav-item__icon" />
