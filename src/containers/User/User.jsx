@@ -1,10 +1,10 @@
 import './User.scss'
 import React from 'react'
 import Account from 'components/Account/Account'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
-import { setUser } from '../../utils/reducers/userAuth'
-import { getUserProfile, UserLogin } from '../../utils/api/AxiosApiProvider'
+import { setUser, updateUser } from '../../utils/reducers/userAuth'
+import { getUserProfile, setUserProfile } from '../../utils/api/AxiosApiProvider'
 import { connect } from 'react-redux'
 
 function User(props) {
@@ -20,38 +20,48 @@ function User(props) {
     React.useEffect(() => {
         const getProfile = async (e) => {
             const response = await getUserProfile()
+
             if (response.status === 200) {
                 dispatch(setUser(response.data.body))
+                setFirstName(response.data.body.firstName)
+                setLastName(response.data.body.lastName)
             }
         }
 
         getProfile().then()
     }, [])
 
+    async function changeUserProfile() {
+        const response = await setUserProfile(firstName, lastName)
+
+        dispatch(updateUser(response.data.body))
+        setEditName(false)
+    }
+
     return (
         <main className="main bg-dark">
-            <div className="header">
+            <header className="header">
                 {editName ? (
                     <h1>
                         Welcome back
                         <br />
                         <input
                             value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
                             type="text"
                             className="input-text"
+                            onChange={(e) => setFirstName(e.target.value)}
                         />
                         <input
                             value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
                             type="text"
                             className="input-text"
+                            onChange={(e) => setLastName(e.target.value)}
                         />
                         <br />
                         <button
                             className="edit-button"
                             onClick={() => {
-                                setEditName(false)
+                                changeUserProfile()
                             }}>
                             Confirm
                         </button>
@@ -66,7 +76,8 @@ function User(props) {
                 ) : (
                     <>
                         <h1>
-                            Welcome back {props.user.firstName} {props.user.lastName}
+                            Welcome back <br />
+                            {props.user.firstName} {props.user.lastName}
                             <br />
                         </h1>
                         <button
@@ -78,7 +89,7 @@ function User(props) {
                         </button>
                     </>
                 )}
-            </div>
+            </header>
             <h2 className="sr-only">Accounts</h2>
 
             <Account />

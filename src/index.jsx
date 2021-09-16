@@ -8,7 +8,12 @@ import { Provider } from 'react-redux'
 import combinedReducers from './utils/reducers/combinedReducers'
 import { createStore } from 'redux'
 
-const store = createStore(combinedReducers)
+/* eslint-disable no-underscore-dangle */
+const store = createStore(
+    combinedReducers /* preloadedState, */,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+/* eslint-enable */
 
 ReactDOM.render(
     <Provider store={store}>

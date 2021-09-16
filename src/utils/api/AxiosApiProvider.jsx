@@ -41,3 +41,24 @@ export function getUserProfile() {
             return error.response
         })
 }
+
+export function setUserProfile(firstName, lastName) {
+    const route = UrlApi + `/user/profile`
+
+    return axios
+        .put(
+            route,
+            { firstName, lastName },
+            {
+                headers: {
+                    Authorization: `Bearer ` + localStorage.getItem('userToken')
+                }
+            }
+        )
+        .then(function (response) {
+            return response
+        })
+        .catch(function (error) {
+            return error.response
+        })
+}

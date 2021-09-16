@@ -14,6 +14,10 @@ export const userAuthSlice = createSlice({
         setUser: (state, user) => {
             state.user = user.payload
         },
+        updateUser: (state, user) => {
+            state.user.firstName = user.payload.firstName
+            state.user.lastName = user.payload.lastName
+        },
         logOut: (state) => {
             state.connected = false
             state.token = 0
@@ -23,6 +27,6 @@ export const userAuthSlice = createSlice({
 })
 
 // Action creators are generated for each case reducers function
-export const { logIn, logOut, setUser } = userAuthSlice.actions
+export const { logIn, logOut, setUser, updateUser } = userAuthSlice.actions
 
 export default userAuthSlice.reducer
