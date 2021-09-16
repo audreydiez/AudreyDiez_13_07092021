@@ -11,6 +11,7 @@ function User(props) {
     const [editName, setEditName] = React.useState(false)
     const [firstName, setFirstName] = React.useState('')
     const [lastName, setLastName] = React.useState('')
+    const [errorMsg, setError] = React.useState('')
 
     let history = useHistory()
     const dispatch = useDispatch()
@@ -21,11 +22,13 @@ function User(props) {
         const getProfile = async (e) => {
             const response = await getUserProfile()
 
-            if (response.status === 200) {
-                dispatch(setUser(response.data.body))
-                setFirstName(response.data.body.firstName)
-                setLastName(response.data.body.lastName)
+            if (response.status !== 200) {
+                return setError('Error user : ' + response.statusText)
             }
+            dispatch(setUser(response.data.body))
+            setFirstName(response.data.body.firstName)
+            setLastName(response.data.body.lastName)
+            setError('')
         }
 
         getProfile().then()
@@ -34,6 +37,10 @@ function User(props) {
     async function changeUserProfile() {
         const response = await setUserProfile(firstName, lastName)
 
+        if (response.status !== 200) {
+            return setError('Error updating user : ' + response.statusText)
+        }
+        console.log(response)
         dispatch(updateUser(response.data.body))
         setEditName(false)
     }
@@ -42,15 +49,17 @@ function User(props) {
         <main className="main bg-dark">
             <header className="header">
                 {editName ? (
-                    <h1>
-                        Welcome back
-                        <br />
+                    <div>
+                        <h1>Welcome back</h1>
+
+                        {errorMsg.length > 0 && <div className="error-msg">{errorMsg}</div>}
                         <input
                             value={firstName}
                             type="text"
                             className="input-text"
                             onChange={(e) => setFirstName(e.target.value)}
                         />
+
                         <input
                             value={lastName}
                             type="text"
@@ -72,14 +81,15 @@ function User(props) {
                             }}>
                             Cancel
                         </button>
-                    </h1>
+                    </div>
                 ) : (
                     <>
                         <h1>
                             Welcome back <br />
                             {props.user.firstName} {props.user.lastName}
-                            <br />
+                            {errorMsg.length > 0 && <div className="error-msg">{errorMsg}</div>}
                         </h1>
+
                         <button
                             className="edit-button"
                             onClick={() => {
