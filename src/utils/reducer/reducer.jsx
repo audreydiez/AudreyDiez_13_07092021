@@ -4,7 +4,8 @@ export const userAuthSlice = createSlice({
     name: 'userAuthReducer',
     initialState: {
         connected: false,
-        token: 0
+        token: 0,
+        firstname: 'default'
     },
     reducers: {
         logIn: (state, token) => {
@@ -12,7 +13,7 @@ export const userAuthSlice = createSlice({
             state.token = token
         },
         setUser: (state, user) => {
-            state.user = user
+            state.firstname = user.firstname
         },
         logOut: (state) => {
             state.connected = false

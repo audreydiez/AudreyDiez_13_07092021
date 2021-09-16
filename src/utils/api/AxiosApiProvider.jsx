@@ -23,15 +23,17 @@ export function UserLogin(login, password) {
 
 export function getUserProfile() {
     const route = UrlApi + `/user/profile`
-    const body = {}
-    const headers = {
-        headers: {
-            Authorization: `Bearer ` + localStorage.getItem('userToken')
-        }
-    }
 
     return axios
-        .post(route, body, headers)
+        .post(
+            route,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ` + localStorage.getItem('userToken')
+                }
+            }
+        )
         .then(function (response) {
             return response
         })

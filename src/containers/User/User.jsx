@@ -5,8 +5,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { setUser } from '../../utils/reducer/reducer'
 import { getUserProfile, UserLogin } from '../../utils/api/AxiosApiProvider'
+import { connect } from 'react-redux'
 
-function User() {
+const mapStateToProps = (state) => {
+    //console.log(state)
+    return {
+        connected: state.userAuth.connected,
+        token: state.userAuth.token,
+        firstname: state.userAuth.firstname
+    }
+}
+
+function User(props) {
     const [editName, setEditName] = React.useState(false)
     const [firstName, setFirstName] = React.useState('Tony')
     const [lastName, setLastName] = React.useState('Stark')
@@ -24,14 +34,11 @@ function User() {
             const response = await getUserProfile()
 
             if (response.status === 200) {
-                dispatch(setUser(response.data.body))
+                //dispatch(setUser(response.data.body))
             }
         }
 
-        getProfile().then((r) => {
-            // set state ?
-            console.log()
-        })
+        getProfile()
     }, [userToken])
 
     return (
@@ -72,7 +79,7 @@ function User() {
                 ) : (
                     <>
                         <h1>
-                            Welcome back
+                            Welcome back {props.firstname}
                             <br />
                         </h1>
                         <button
@@ -93,5 +100,4 @@ function User() {
         </main>
     )
 }
-
-export default User
+export default connect(mapStateToProps)(User)
