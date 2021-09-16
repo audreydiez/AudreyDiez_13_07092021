@@ -3,43 +3,30 @@ import React from 'react'
 import Account from 'components/Account/Account'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-import { setUser } from '../../utils/reducer/reducer'
+import { setUser } from '../../utils/reducers/userAuth'
 import { getUserProfile, UserLogin } from '../../utils/api/AxiosApiProvider'
 import { connect } from 'react-redux'
 
-const mapStateToProps = (state) => {
-    //console.log(state)
-    return {
-        connected: state.userAuth.connected,
-        token: state.userAuth.token,
-        firstname: state.userAuth.firstname
-    }
-}
-
 function User(props) {
     const [editName, setEditName] = React.useState(false)
-    const [firstName, setFirstName] = React.useState('Tony')
-    const [lastName, setLastName] = React.useState('Stark')
+    const [firstName, setFirstName] = React.useState('')
+    const [lastName, setLastName] = React.useState('')
 
     let history = useHistory()
     const dispatch = useDispatch()
 
-    const isConnected = useSelector((state) => state.userAuth.connected)
-    const userToken = useSelector((state) => state.userAuth.token)
-
-    if (!isConnected) history.push('/sign-in')
+    if (!props.connected) history.push('/sign-in')
 
     React.useEffect(() => {
         const getProfile = async (e) => {
             const response = await getUserProfile()
-
             if (response.status === 200) {
-                //dispatch(setUser(response.data.body))
+                dispatch(setUser(response.data.body))
             }
         }
 
-        getProfile()
-    }, [userToken])
+        getProfile().then()
+    }, [])
 
     return (
         <main className="main bg-dark">
@@ -79,7 +66,7 @@ function User(props) {
                 ) : (
                     <>
                         <h1>
-                            Welcome back {props.firstname}
+                            Welcome back {props.user.firstName} {props.user.lastName}
                             <br />
                         </h1>
                         <button
@@ -100,4 +87,13 @@ function User(props) {
         </main>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        connected: state.userAuth.connected,
+        token: state.userAuth.token,
+        user: state.userAuth.user
+    }
+}
+
 export default connect(mapStateToProps)(User)

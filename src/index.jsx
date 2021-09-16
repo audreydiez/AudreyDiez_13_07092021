@@ -5,7 +5,10 @@ import './index.scss'
 import App from './router/App'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
-import store from 'utils/store/store'
+import combinedReducers from './utils/reducers/combinedReducers'
+import { createStore } from 'redux'
+
+const store = createStore(combinedReducers)
 
 ReactDOM.render(
     <Provider store={store}>

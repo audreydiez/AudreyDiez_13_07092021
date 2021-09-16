@@ -6,7 +6,7 @@ import { UserLogin } from 'utils/api/AxiosApiProvider'
 import React from 'react'
 import { useHistory } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { logIn } from 'utils/reducer/reducer'
+import { logIn } from 'utils/reducers/userAuth'
 
 function SignIn() {
     const [username, setUsername] = React.useState('')
@@ -15,7 +15,7 @@ function SignIn() {
 
     let history = useHistory()
 
-    //reducer
+    //reducers
 
     const dispatch = useDispatch()
 

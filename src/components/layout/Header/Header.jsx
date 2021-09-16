@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
 
-import userAuthReducer, { logOut } from 'utils/reducer/reducer'
+import userAuthReducer, { logOut } from 'utils/reducers/userAuth'
 
 function Header() {
     const isConnected = useSelector((state) => state.userAuth.connected)
