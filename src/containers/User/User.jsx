@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { setUser, updateUser } from '../../utils/reducers/userAuth'
 import { getUserProfile, setUserProfile } from '../../utils/api/AxiosApiProvider'
 import { connect } from 'react-redux'
+import { accounts } from 'assets/data/data'
 
 function User(props) {
     const [editName, setEditName] = React.useState(false)
@@ -98,9 +99,14 @@ function User(props) {
             </header>
             <h2 className="sr-only">Accounts</h2>
 
-            <Account />
-            <Account />
-            <Account />
+            {accounts.map((account) => (
+                <Account
+                    key={account.id}
+                    title={account.title}
+                    amount={account.amount}
+                    description={account.description}
+                />
+            ))}
         </main>
     )
 }
