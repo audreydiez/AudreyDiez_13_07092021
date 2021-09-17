@@ -2,7 +2,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: nowrap;
     padding: 5px 20px;
+
+    @media screen and (max-width: 550px) {
+        flex-wrap: wrap;
+    }
+}
+
+.col-2 {
+    @media screen and (max-width: 550px) {
+        width: 100%;
+
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .main-nav a {
@@ -38,6 +52,10 @@
 
 .right-nav {
     display: flex;
+
+    @media screen and (max-width: 550px) {
+        height: 40px;
+    }
 }
 
 .main-nav-logo-image {

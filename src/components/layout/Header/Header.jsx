@@ -14,24 +14,24 @@ function Header(props) {
 
     return (
         <nav className="main-nav">
-            <Link className="main-nav-logo" to={'/'}>
+            <Link className="col-2 main-nav-logo" to={'/'}>
                 <img className="main-nav-logo-image" src={Logo} alt="Argent Bank Logo" />
                 <h1 className="sr-only">Argent Bank</h1>
             </Link>
 
-            <div className="right-nav">
+            <div className="col-2 right-nav">
                 {props.connected ? (
                     <>
                         <img src={userAvatar} alt={props.user.firstName} className="user-avatar" />
                         <Link to={'/user'} className="main-nav-item">
-                            Welcome user
+                            {props.user.firstName}
                         </Link>
                         <Link
                             to={'/sign-in'}
                             className="main-nav-item"
                             onClick={() => dispatch(logOut())}>
                             <FontAwesomeIcon icon={faUserCircle} className="main-nav-item__icon" />
-                            Log Out
+                            Sign out
                         </Link>
                     </>
                 ) : (
