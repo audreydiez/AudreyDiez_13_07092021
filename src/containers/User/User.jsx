@@ -36,7 +36,7 @@ function User(props) {
         if (response.status !== 200) {
             return setError('Error updating user : ' + response.statusText)
         }
-        console.log(response)
+
         dispatch(updateUser(response.data.body))
         setEditName(false)
     }

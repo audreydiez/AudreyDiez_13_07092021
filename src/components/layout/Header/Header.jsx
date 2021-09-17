@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom'
 import './Header.scss'
 import Logo from 'assets/img/argentBankLogo.png'
+import userAvatar from 'assets/img/user.svg'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch, useSelector } from 'react-redux'
+import { faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { connect, useDispatch, useSelector } from 'react-redux'
 
-import userAuthReducer, { logOut } from 'utils/reducers/userAuth'
+import { logOut } from 'utils/reducers/userAuth'
 
-function Header() {
-    const isConnected = useSelector((state) => state.userAuth.connected)
-
+function Header(props) {
     const dispatch = useDispatch()
 
     return (
@@ -20,14 +19,20 @@ function Header() {
                 <h1 className="sr-only">Argent Bank</h1>
             </Link>
 
-            <div>
-                {isConnected ? (
+            <div className="right-nav">
+                {props.connected ? (
                     <>
-                        <Link to={'/user'}>Welcome user</Link>
-                        <div className="main-nav-item" onClick={() => dispatch(logOut())}>
+                        <img src={userAvatar} alt={props.user.firstName} className="user-avatar" />
+                        <Link to={'/user'} className="main-nav-item">
+                            Welcome user
+                        </Link>
+                        <Link
+                            to={'/sign-in'}
+                            className="main-nav-item"
+                            onClick={() => dispatch(logOut())}>
                             <FontAwesomeIcon icon={faUserCircle} className="main-nav-item__icon" />
                             Log Out
-                        </div>
+                        </Link>
                     </>
                 ) : (
                     <Link className="main-nav-item" to={'/sign-in'}>
@@ -40,4 +45,11 @@ function Header() {
     )
 }
 
-export default Header
+const mapStateToProps = (state) => {
+    return {
+        connected: state.userAuth.connected,
+        user: state.userAuth.user
+    }
+}
+
+export default connect(mapStateToProps)(Header)
