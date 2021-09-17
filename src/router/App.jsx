@@ -7,6 +7,7 @@ import { SubRoutes } from 'router/SubRoutes/SubRoutes'
 import Header from 'components/layout/Header/Header'
 import ErrorPage from 'components/ErrorPage/ErrorPage'
 import Footer from 'components/layout/Footer/Footer'
+import { connect } from 'react-redux'
 
 const routes = [
     {
@@ -22,7 +23,8 @@ const routes = [
     {
         path: '/user',
         exact: true,
-        component: User
+        component: User,
+        private: true
     },
     {
         path: '*',
@@ -31,15 +33,19 @@ const routes = [
     }
 ]
 
-function App() {
+function App(props) {
     return (
         <Router>
             <div className="router-container">
                 <Header />
                 <Switch>
-                    {routes.map((route, i) => (
-                        <SubRoutes key={i} {...route} />
-                    ))}
+                    {routes.map((route, i) =>
+                        route.private && !props.connected ? (
+                            <SignIn key={i} exact path={route.path} />
+                        ) : (
+                            <SubRoutes key={i} {...route} />
+                        )
+                    )}
                 </Switch>
                 <Footer />
             </div>
@@ -47,4 +53,10 @@ function App() {
     )
 }
 
-export default App
+const mapStateToProps = (state) => {
+    return {
+        connected: state.userAuth.connected
+    }
+}
+
+export default connect(mapStateToProps)(App)

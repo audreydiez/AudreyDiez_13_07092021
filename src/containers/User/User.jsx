@@ -2,7 +2,6 @@ import './User.scss'
 import React from 'react'
 import Account from 'components/Account/Account'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router'
 import { setUser, updateUser } from '../../utils/reducers/userAuth'
 import { getUserProfile, setUserProfile } from '../../utils/api/AxiosApiProvider'
 import { connect } from 'react-redux'
@@ -13,10 +12,7 @@ function User(props) {
     const [lastName, setLastName] = React.useState('')
     const [errorMsg, setError] = React.useState('')
 
-    let history = useHistory()
     const dispatch = useDispatch()
-
-    if (!props.connected) history.push('/sign-in')
 
     React.useEffect(() => {
         const getProfile = async (e) => {
