@@ -3,14 +3,18 @@ import './SignIn.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { UserLogin } from 'utils/api/AxiosApiProvider'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { logIn } from 'utils/reducers/userAuth'
+import { getLocalStorageOrDefault } from 'utils/Storage/Storage'
 
 function SignIn() {
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const [RememberMe, setRememberMe] = React.useState(
+        getLocalStorageOrDefault('RememberUser', false)
+    )
     const [errorMsg, setErrorMsg] = React.useState(' ')
 
     let history = useHistory()
@@ -18,6 +22,11 @@ function SignIn() {
     //reducers
 
     const dispatch = useDispatch()
+
+    // Session storage
+    useEffect(() => {
+        localStorage.setItem('RememberUser', JSON.stringify(RememberMe))
+    }, [RememberMe])
 
     // Log-in
     const logUser = async (e) => {
@@ -27,7 +36,7 @@ function SignIn() {
         if (username.length === 0 || password.length === 0)
             return setErrorMsg('All fields are required')
 
-        const response = await UserLogin(username, password)
+        const response = await UserLogin(username, password, RememberMe)
         if (response.status !== 200) {
             return setErrorMsg(response.message)
         }
@@ -67,7 +76,14 @@ function SignIn() {
                         />
                     </div>
                     <div className="input-remember">
-                        <input type="checkbox" id="remember-me" />
+                        <input
+                            type="checkbox"
+                            id="remember-me"
+                            checked={RememberMe}
+                            onChange={(e) => {
+                                setRememberMe(!RememberMe)
+                            }}
+                        />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
 

@@ -7,8 +7,13 @@ import { SubRoutes } from 'router/SubRoutes/SubRoutes'
 import Header from 'components/layout/Header/Header'
 import ErrorPage from 'components/ErrorPage/ErrorPage'
 import Footer from 'components/layout/Footer/Footer'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import SwaggerApiV2 from '../utils/api/ApiDocs/SwaggerApiV2'
+import { logIn, setUser } from '../utils/reducers/userAuth'
+import { getUserProfile } from '../utils/api/AxiosApiProvider'
+import React from 'react'
+
+const ENV_MODE = 'development'
 
 const routes = [
     {
@@ -28,11 +33,6 @@ const routes = [
         private: true
     },
     {
-        path: '/api-docs',
-        exact: true,
-        component: SwaggerApiV2
-    },
-    {
         path: '*',
         exact: false,
         component: ErrorPage
@@ -40,7 +40,35 @@ const routes = [
 ]
 
 function App(props) {
+    const dispatch = useDispatch()
+
+    // Swagger warning disable
     console.warn = () => {}
+
+    // Push API route in dev mode
+    if (ENV_MODE !== 'production') {
+        routes.unshift({
+            path: '/api-docs',
+            exact: true,
+            component: SwaggerApiV2
+        })
+    }
+
+    // Check local storage, get user and fill state
+    const localToken = localStorage.getItem('userToken')
+    if (localToken) {
+        logUserFromToken(localToken)
+    }
+
+    async function logUserFromToken(localToken) {
+        const response = await getUserProfile(localToken)
+
+        if (response.status === 200) {
+            dispatch(setUser(response.data.body))
+            dispatch(logIn(localToken))
+        }
+    }
+
     return (
         <Router>
             <div className="router-container">

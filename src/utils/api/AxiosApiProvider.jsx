@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const UrlApi = 'http://localhost:3001/api/v1'
 
-export function UserLogin(login, password) {
+export function UserLogin(login, password, rememberMe) {
     return axios
         .post(UrlApi + '/user/login', {
             email: login,
@@ -10,7 +10,9 @@ export function UserLogin(login, password) {
         })
         .then(function (response) {
             if (response.data.body.token) {
-                localStorage.setItem('userToken', response.data.body.token)
+                if (rememberMe) {
+                    localStorage.setItem('userToken', response.data.body.token)
+                }
                 return response
             }
         })
@@ -21,7 +23,7 @@ export function UserLogin(login, password) {
         })
 }
 
-export function getUserProfile() {
+export function getUserProfile(token) {
     const route = UrlApi + `/user/profile`
 
     return axios
@@ -30,7 +32,7 @@ export function getUserProfile() {
             {},
             {
                 headers: {
-                    Authorization: `Bearer ` + localStorage.getItem('userToken')
+                    Authorization: `Bearer ` + token
                 }
             }
         )
@@ -42,7 +44,7 @@ export function getUserProfile() {
         })
 }
 
-export function updateUserProfile(firstName, lastName) {
+export function updateUserProfile(firstName, lastName, token) {
     const route = UrlApi + `/user/profile`
 
     return axios
@@ -51,7 +53,7 @@ export function updateUserProfile(firstName, lastName) {
             { firstName, lastName },
             {
                 headers: {
-                    Authorization: `Bearer ` + localStorage.getItem('userToken')
+                    Authorization: `Bearer ` + token
                 }
             }
         )

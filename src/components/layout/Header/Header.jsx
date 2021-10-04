@@ -12,6 +12,12 @@ import { logOut } from 'utils/reducers/userAuth'
 function Header(props) {
     const dispatch = useDispatch()
 
+    function userLogOut() {
+        dispatch(logOut())
+        sessionStorage.clear()
+        localStorage.clear()
+    }
+
     return (
         <nav className="main-nav">
             <Link className="col-2 main-nav-logo" to={'/'}>
@@ -26,10 +32,7 @@ function Header(props) {
                         <Link to={'/user'} className="main-nav-item">
                             {props.user.firstName}
                         </Link>
-                        <Link
-                            to={'/sign-in'}
-                            className="main-nav-item"
-                            onClick={() => dispatch(logOut())}>
+                        <Link to={'/sign-in'} className="main-nav-item" onClick={userLogOut}>
                             <FontAwesomeIcon icon={faSignOutAlt} className="main-nav-item__icon" />
                             Sign out
                         </Link>

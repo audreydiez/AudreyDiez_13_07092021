@@ -19,7 +19,7 @@ function User(props) {
 
     React.useEffect(() => {
         ;(async (e) => {
-            const response = await getUserProfile()
+            const response = await getUserProfile(props.token.payload)
 
             if (response.status !== 200) {
                 return setError('Error user : ' + response.statusText)
@@ -32,12 +32,13 @@ function User(props) {
     }, [])
 
     async function changeUserProfile() {
-        const response = await updateUserProfile(firstName, lastName)
+        const response = await updateUserProfile(firstName, lastName, props.token.payload)
 
         if (response.status !== 200) {
             return setError('Error updating user : ' + response.statusText)
         }
 
+        // State update
         dispatch(updateUser(response.data.body))
 
         setEditName(false)

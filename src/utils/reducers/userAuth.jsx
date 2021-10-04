@@ -10,6 +10,7 @@ export const userAuthSlice = createSlice({
     reducers: {
         logIn: (state, token) => {
             state.connected = true
+            state.token = token
         },
         setUser: (state, user) => {
             state.user = user.payload
