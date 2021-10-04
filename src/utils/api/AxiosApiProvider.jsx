@@ -42,7 +42,7 @@ export function getUserProfile() {
         })
 }
 
-export function setUserProfile(firstName, lastName) {
+export function updateUserProfile(firstName, lastName) {
     const route = UrlApi + `/user/profile`
 
     return axios

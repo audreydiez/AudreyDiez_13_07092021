@@ -5,7 +5,7 @@ import userAvatar from 'assets/img/user.svg'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 
 import { logOut } from 'utils/reducers/userAuth'
 
@@ -30,7 +30,7 @@ function Header(props) {
                             to={'/sign-in'}
                             className="main-nav-item"
                             onClick={() => dispatch(logOut())}>
-                            <FontAwesomeIcon icon={faUserCircle} className="main-nav-item__icon" />
+                            <FontAwesomeIcon icon={faSignOutAlt} className="main-nav-item__icon" />
                             Sign out
                         </Link>
                     </>

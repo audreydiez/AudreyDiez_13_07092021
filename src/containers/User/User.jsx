@@ -1,9 +1,11 @@
 import './User.scss'
 import React from 'react'
 import Account from 'components/Account/Account'
+
 import { useDispatch } from 'react-redux'
 import { setUser, updateUser } from '../../utils/reducers/userAuth'
-import { getUserProfile, setUserProfile } from '../../utils/api/AxiosApiProvider'
+
+import { getUserProfile, updateUserProfile } from '../../utils/api/AxiosApiProvider'
 import { connect } from 'react-redux'
 import { accounts } from 'assets/data/data'
 
@@ -16,7 +18,7 @@ function User(props) {
     const dispatch = useDispatch()
 
     React.useEffect(() => {
-        const getProfile = async (e) => {
+        ;(async (e) => {
             const response = await getUserProfile()
 
             if (response.status !== 200) {
@@ -26,19 +28,18 @@ function User(props) {
             setFirstName(response.data.body.firstName)
             setLastName(response.data.body.lastName)
             setError('')
-        }
-
-        getProfile().then()
+        })()
     }, [])
 
     async function changeUserProfile() {
-        const response = await setUserProfile(firstName, lastName)
+        const response = await updateUserProfile(firstName, lastName)
 
         if (response.status !== 200) {
             return setError('Error updating user : ' + response.statusText)
         }
 
         dispatch(updateUser(response.data.body))
+
         setEditName(false)
     }
 

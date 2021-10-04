@@ -8,6 +8,7 @@ import Header from 'components/layout/Header/Header'
 import ErrorPage from 'components/ErrorPage/ErrorPage'
 import Footer from 'components/layout/Footer/Footer'
 import { connect } from 'react-redux'
+import SwaggerApiV2 from '../utils/api/ApiDocs/SwaggerApiV2'
 
 const routes = [
     {
@@ -25,6 +26,11 @@ const routes = [
         exact: true,
         component: User,
         private: true
+    },
+    {
+        path: '/api-docs',
+        exact: true,
+        component: SwaggerApiV2
     },
     {
         path: '*',
