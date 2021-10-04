@@ -40,6 +40,7 @@ const routes = [
 ]
 
 function App(props) {
+    console.warn = () => {}
     return (
         <Router>
             <div className="router-container">
