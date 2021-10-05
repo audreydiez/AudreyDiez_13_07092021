@@ -14,7 +14,6 @@ function Header(props) {
 
     function userLogOut() {
         dispatch(logOut())
-        sessionStorage.clear()
         localStorage.clear()
     }
 

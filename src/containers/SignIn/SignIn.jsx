@@ -2,7 +2,7 @@ import './SignIn.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
-import { UserLogin } from 'utils/api/AxiosApiProvider'
+import { getUserToken } from 'utils/api/AxiosApiProvider'
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { useDispatch } from 'react-redux'
@@ -20,7 +20,6 @@ function SignIn() {
     let history = useHistory()
 
     //reducers
-
     const dispatch = useDispatch()
 
     // Session storage
@@ -36,7 +35,7 @@ function SignIn() {
         if (username.length === 0 || password.length === 0)
             return setErrorMsg('All fields are required')
 
-        const response = await UserLogin(username, password, RememberMe)
+        const response = await getUserToken(username, password, RememberMe)
         if (response.status !== 200) {
             return setErrorMsg(response.message)
         }
@@ -66,7 +65,7 @@ function SignIn() {
                     <div className="input-wrapper">
                         <label htmlFor="password">Password</label>
                         <input
-                            type="text"
+                            type="password"
                             id="password"
                             autoComplete="current-password"
                             value={password}

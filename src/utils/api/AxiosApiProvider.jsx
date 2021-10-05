@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const UrlApi = 'http://localhost:3001/api/v1'
 
-export function UserLogin(login, password, rememberMe) {
+export function getUserToken(login, password, rememberMe) {
     return axios
         .post(UrlApi + '/user/login', {
             email: login,

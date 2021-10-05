@@ -9,7 +9,7 @@ import ErrorPage from 'components/ErrorPage/ErrorPage'
 import Footer from 'components/layout/Footer/Footer'
 import { connect, useDispatch } from 'react-redux'
 import SwaggerApiV2 from '../utils/api/ApiDocs/SwaggerApiV2'
-import { logIn, setUser } from '../utils/reducers/userAuth'
+import { logIn, logOut, setUser } from '../utils/reducers/userAuth'
 import { getUserProfile } from '../utils/api/AxiosApiProvider'
 import React from 'react'
 
@@ -63,7 +63,10 @@ function App(props) {
     async function logUserFromToken(localToken) {
         const response = await getUserProfile(localToken)
 
-        if (response.status === 200) {
+        if (response.status !== 200) {
+            dispatch(logOut())
+            localStorage.clear()
+        } else {
             dispatch(setUser(response.data.body))
             dispatch(logIn(localToken))
         }
@@ -75,6 +78,7 @@ function App(props) {
                 <Header />
                 <Switch>
                     {routes.map((route, i) =>
+                        // If route private and no connected
                         route.private && !props.connected ? (
                             <SignIn key={i} exact path={route.path} />
                         ) : (

@@ -17,6 +17,7 @@ function User(props) {
 
     const dispatch = useDispatch()
 
+    // Get user profile once
     React.useEffect(() => {
         ;(async (e) => {
             const response = await getUserProfile(props.token.payload)
