@@ -16,7 +16,7 @@
     "/accounts": {
       "get": {
         "tags": [
-          "Account Module"
+          "Accounts Module"
         ],
         "summary": "Transactions API",
         "description": "Get all user's accounts",
@@ -53,10 +53,10 @@
         ]
       }
     },
-    "/transactions/{accountId}/transactions": {
+    "/accounts/{accountId}/transactions": {
       "get": {
         "tags": [
-          "Transactions Module"
+          "Accounts Transactions Module"
         ],
         "summary": "Transactions API",
         "description": "Get account transactions",
@@ -100,10 +100,10 @@
         ]
       }
     },
-    "/transaction/{accountId}/{transactionId}": {
+    "/accounts/{accountId}/transactions/{transactionId}": {
       "get": {
         "tags": [
-          "Transaction Details Module"
+          "Accounts Transactions Detail Module"
         ],
         "summary": "Transactions API",
         "description": "Get details for a transaction",
@@ -155,7 +155,7 @@
       },
       "put": {
         "tags": [
-          "Transaction Details Module"
+          "Accounts Transactions Detail Module"
         ],
         "summary": "Transactions API",
         "description": "Update details for a transaction",

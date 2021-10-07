@@ -11,7 +11,8 @@ import { connect, useDispatch } from 'react-redux'
 import SwaggerApiV2 from '../utils/api/ApiDocs/SwaggerApiV2'
 import { logIn, logOut, setUser } from '../utils/reducers/userAuth'
 import { getUserProfile } from '../utils/api/AxiosApiProvider'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { checkTokenFromLocalStorage } from '../utils/Storage/Storage'
 
 const ENV_MODE = 'development'
 
@@ -54,23 +55,25 @@ function App(props) {
         })
     }
 
-    // Check local storage, get user and fill state
-    const localToken = localStorage.getItem('userToken')
-    if (localToken) {
-        logUserFromToken(localToken)
-    }
+    async function checkTokenFromLocalStorage() {
+        const localToken = localStorage.getItem('userToken')
+        if (localToken) {
+            const response = await getUserProfile(localToken)
 
-    async function logUserFromToken(localToken) {
-        const response = await getUserProfile(localToken)
-
-        if (response.status !== 200) {
-            dispatch(logOut())
-            localStorage.clear()
-        } else {
-            dispatch(setUser(response.data.body))
-            dispatch(logIn(localToken))
+            if (response.status !== 200) {
+                dispatch(logOut())
+                localStorage.clear()
+            } else {
+                dispatch(logIn(localToken))
+                dispatch(setUser(response.data.body))
+            }
         }
     }
+
+    // Check local storage, get user and fill state
+    useEffect(() => {
+        checkTokenFromLocalStorage()
+    }, [])
 
     return (
         <Router>
