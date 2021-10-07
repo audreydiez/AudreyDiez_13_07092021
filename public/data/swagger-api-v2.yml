@@ -1,0 +1,225 @@
+swagger: '2.0'
+info:
+  description: Accounts Transactions API model
+  version: 1.0.0
+  title: Bank Argent API documentation Phase 2
+  termsOfService: http://swagger.io/terms/
+host: virtserver.swaggerhub.com
+basePath: /audrey.diez/ArgentBankPhase2/1.0.0
+schemes:
+  - https
+  - http
+paths:
+  /accounts:
+    get:
+      tags:
+        - Accounts Module
+      summary: Transactions API
+      description: Get all user's accounts
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Accounts retrieved successfully
+          schema:
+            $ref: '#/definitions/AccountsResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
+  /accounts/{accountId}/transactions:
+    get:
+      tags:
+        - Accounts Transactions Module
+      summary: Transactions API
+      description: Get account transactions
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - name: accountId
+          in: path
+          description: account ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Account transactions retrieved successfully
+          schema:
+            $ref: '#/definitions/TransactionsResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
+  /accounts/{accountId}/transactions/{transactionId}:
+    get:
+      tags:
+        - Accounts Transactions Detail Module
+      summary: Transactions API
+      description: Get details for a transaction
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - name: accountId
+          in: path
+          description: account ID
+          required: true
+          type: integer
+        - name: transactionId
+          in: path
+          description: transaction ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Account transaction details retrieved successfully
+          schema:
+            $ref: '#/definitions/TransactionDetailsResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
+    put:
+      tags:
+        - Accounts Transactions Detail Module
+      summary: Transactions API
+      description: Update details for a transaction
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - name: accountId
+          in: path
+          description: account ID
+          required: true
+          type: integer
+        - name: transactionId
+          in: path
+          description: transaction ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Account transaction details updated successfully
+          schema:
+            $ref: '#/definitions/TransactionDetailsResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  AccountsResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+        example: Accounts retrieved successfully
+      body:
+        type: array
+        items:
+          $ref: '#/definitions/Account'
+  TransactionsResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+        example: Transactions retrieved successfully
+      body:
+        type: array
+        items:
+          $ref: '#/definitions/Transaction'
+  TransactionDetailsResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+        example: Transactions retrieved successfully
+      body:
+        type: array
+        items:
+          $ref: '#/definitions/TransactionDetails'
+  Account:
+    type: object
+    properties:
+      id:
+        type: integer
+      created:
+        type: string
+        description: account creation date
+      name:
+        type: string
+        example: credit card
+      currency:
+        type: string
+        example: $
+      balance:
+        type: number
+        example: 123
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: transaction ID
+      created:
+        type: string
+        description: transaction date
+      description:
+        type: string
+        description: transaction description
+      ammount:
+        type: number
+        description: transaction ammount
+      balance:
+        type: number
+        description: account balance after transaction
+  TransactionDetails:
+    type: object
+    properties:
+      transactionType:
+        type: string
+        description: transaction type
+      category:
+        type: string
+        description: transaction category
+      note:
+        type: string
+        description: user's notes for transaction
