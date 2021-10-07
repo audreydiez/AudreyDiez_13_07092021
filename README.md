@@ -1,70 +1,151 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Contributors][contributors-shield]][contributors-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+![Website](https://img.shields.io/website?style=for-the-badge&up_message=audreydiez.com&url=https%3A%2F%2Faudreydiez.com%2F)
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/audreydiez/AudreyDiez_13_07092021">  
+    <img src="Readme_assets/logo.png" alt="Logo" width="456" height="124">
+  </a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<h3 align="center">Projet 13 - ArgentBank</h3>
+</p>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<p align="left">
+<br />
+     Compétences visées :     
+       <ol>
+         <li>Implémenter un gestionnaire d'état dans une application React (Redux)</li>      
+         <li>Intéragir avec une API (Axios/MongoDB)</li>  
+         <li>Modéliser une API (Swagger)</li>  
+         <li>S'authentifier à une API (JWT Token)</li>  
+       </ol>    
+    <br />
+    ·
+    <a href="https://github.com/audreydiez/AudreyDiez_13_07092021/issues">Reporter un Bug</a>
+    ·
+    <a href="https://github.com/audreydiez/AudreyDiez_13_07092021/issues">Nouvelle feature</a>
+     <br />
+      <br />
+  </p>
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+<details open="open">
+  <summary>Wiki projet</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">Contexte</a>     
+    </li>
+    <li>
+      <a href="#getting-started">Installation</a>    
+      <ul>
+        <li><a href="#prerequisites">Scripts disponibles</a></li>
+      </ul>  
+    </li>
+    <li><a href="#usage">Maquettes</a></li> 
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<!-- ABOUT THE PROJECT -->
+## Le projet
 
-### `npm run eject`
+[![Home][product-screenshot]](https://)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Le projet concerne une nouvelle banque qui démarre, Argent Bank, qui essaie de percer dans le secteur et qui a besoin d'aide pour mettre en place son application. Nous avons obtenu un contrat en deux parties qui se décompose en plusieurs phases :
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Phase 1 : Authentification des utilisateurs - Création d'une application web permettant aux clients de se connecter et de gérer leurs comptes et leur profil.
+* Phase 2 : Transactions - Il s’agirait de spécifier les endpoints d’API nécessaires pour une éventuelle deuxième mission une fois que nous aurons terminé la première.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Développé avec :
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* [React](https://fr.reactjs.org/)
+* [React - Router](https://reactrouter.com/)
+* [Babel/core](https://babeljs.io/)
+* [SASS](https://sass-lang.com/)
+* [ESLint](https://eslint.org/)
+* [Axios](https://axios-http.com/)
+* [MongoDB](https://www.mongodb.com/cloud/atlas/lp/try2?utm_content=rlsavisitor&utm_source=google&utm_campaign=gs_emea_rlsamulti_search_core_brand_atlas_desktop_rlsa&utm_term=mongodb&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=14412646455&gclid=CjwKCAjwtfqKBhBoEiwAZuesiJAWmTboVWna0ekghpt9L1rPlPiyEdL0m51xPw-E0e1yUS6veOBNaxoC978QAvD_BwE)
+* [Redux](https://redux.js.org/)
+* [Swagger](https://swagger.io/)
 
-## Learn More
+[![Home][product-profile]](https://)
+[![Home][product-swagger]](https://)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<!-- GETTING STARTED -->
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Install and launch back-end
 
-### Code Splitting
+Check Node and MongoDB version:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+`node --version`
+`mongo --version`
 
-### Analyzing the Bundle Size
+Clone the repository "Project 10 Bank-API - Backend":
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+`https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API`
 
-### Making a Progressive Web App
+Then install dependencies:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+`npm install`
 
-### Advanced Configuration
+Then launch back-end (on port 3001):
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+`npm run dev:server`
 
-### Deployment
+Finally populate database in another terminal:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+`npm run populate-db`
 
-### `npm run build` fails to minify
+## Install and launch front-end
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Clone this repository:
+
+`git clone git@github.com:audreydiez/AudreyDiez_13_07092021.git`
+
+Then install dependencies:
+
+`npm install`
+
+Launch front-end on port 3000, automatically displayed on your default browser at `http://localhost:3000/`:
+
+`npm run start`
+
+-  URL for swagger API phase 2 :
+- `http://localhost:3000/api-docs`
+
+
+<!-- CONTACT -->
+## Contact
+
+Audrey Diez - [@Linkedin](https://www.linkedin.com/in/audrey-diez-5862345b/) - audrey.diez@gmail.com
+
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/audreydiez/AudreyDiez_13_07092021?style=for-the-badge
+[contributors-url]: https://github.com/audreydiez/AudreyDiez_13_07092021/graphs/contributors
+
+[stars-shield]: https://img.shields.io/github/stars/audreydiez/AudreyDiez_13_07092021.svg?style=for-the-badge
+[stars-url]: https://github.com/audreydiez/AudreyDiez_13_07092021/stargazers
+[issues-shield]: https://img.shields.io/github/issues/audreydiez/AudreyDiez_13_07092021.svg?style=for-the-badge
+[issues-url]: https://github.com/audreydiez/AudreyDiez_13_07092021/issues
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/audrey-diez-5862345b
+[website-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[website-url]: https://linkedin.com/in/audrey-diez-5862345b
+[product-screenshot]: Readme_assets/home.png
+[product-profile]: Readme_assets/profile.png
+[product-swagger]: Readme_assets/swagger.png
+[logo]: Readme_assets/logo.png
