@@ -77,6 +77,22 @@
             "description": "account ID",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "Start date for fetching transactions",
+            "required": false,
+            "type": "string",
+            "example": "YYYY-MM-DD"
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "End date for fetching transactions",
+            "required": false,
+            "type": "string",
+            "example": "YYYY-MM-DD"
           }
         ],
         "responses": {
@@ -308,9 +324,9 @@
           "type": "string",
           "description": "transaction description"
         },
-        "ammount": {
+        "amount": {
           "type": "number",
-          "description": "transaction ammount"
+          "description": "transaction amount"
         },
         "balance": {
           "type": "number",

@@ -2,7 +2,7 @@ import './SignIn.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
-import { getUserToken } from 'utils/api/AxiosApiProvider'
+import { getUserToken } from 'utils/api/AxiosApiProvider/AxiosApiProvider'
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { useDispatch } from 'react-redux'

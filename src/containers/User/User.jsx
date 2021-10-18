@@ -5,7 +5,10 @@ import Account from 'components/Account/Account'
 import { useDispatch } from 'react-redux'
 import { setUser, updateUser } from '../../utils/reducers/userAuth'
 
-import { getUserProfile, updateUserProfile } from '../../utils/api/AxiosApiProvider'
+import {
+    getUserProfile,
+    updateUserProfile
+} from '../../utils/api/AxiosApiProvider/AxiosApiProvider'
 import { connect } from 'react-redux'
 import { accounts } from 'assets/data/data'
 

@@ -16,7 +16,7 @@
     "/accounts": {
       "get": {
         "tags": [
-          "Account Module"
+          "Accounts Module"
         ],
         "summary": "Transactions API",
         "description": "Get all user's accounts",
@@ -53,10 +53,10 @@
         ]
       }
     },
-    "/transactions/{accountId}/transactions": {
+    "/accounts/{accountId}/transactions": {
       "get": {
         "tags": [
-          "Transactions Module"
+          "Accounts Transactions Module"
         ],
         "summary": "Transactions API",
         "description": "Get account transactions",
@@ -77,6 +77,22 @@
             "description": "account ID",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "Start date for fetching transactions",
+            "required": false,
+            "type": "string",
+            "example": "YYYY-MM-DD"
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "End date for fetching transactions",
+            "required": false,
+            "type": "string",
+            "example": "YYYY-MM-DD"
           }
         ],
         "responses": {
@@ -100,10 +116,10 @@
         ]
       }
     },
-    "/transaction/{accountId}/{transactionId}": {
+    "/accounts/{accountId}/transactions/{transactionId}": {
       "get": {
         "tags": [
-          "Transaction Details Module"
+          "Accounts Transactions Detail Module"
         ],
         "summary": "Transactions API",
         "description": "Get details for a transaction",
@@ -155,7 +171,7 @@
       },
       "put": {
         "tags": [
-          "Transaction Details Module"
+          "Accounts Transactions Detail Module"
         ],
         "summary": "Transactions API",
         "description": "Update details for a transaction",
@@ -308,9 +324,9 @@
           "type": "string",
           "description": "transaction description"
         },
-        "ammount": {
+        "amount": {
           "type": "number",
-          "description": "transaction ammount"
+          "description": "transaction amount"
         },
         "balance": {
           "type": "number",

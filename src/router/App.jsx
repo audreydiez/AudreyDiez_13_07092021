@@ -10,7 +10,7 @@ import Footer from 'components/layout/Footer/Footer'
 import { connect, useDispatch } from 'react-redux'
 import SwaggerApiV2 from '../utils/api/ApiDocs/SwaggerApiV2'
 import { logIn, logOut, setUser } from '../utils/reducers/userAuth'
-import { getUserProfile } from '../utils/api/AxiosApiProvider'
+import { getUserProfile } from '../utils/api/AxiosApiProvider/AxiosApiProvider'
 import React, { useEffect } from 'react'
 import { checkTokenFromLocalStorage } from '../utils/Storage/Storage'
 
